@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sdasdf</title>
+</head>
+<style>
+    body {
+        margin: 0;
+    }
+
+    .site-title {
+        margin: 0;
+        padding: 2em;
+        text-align: center;
+    }
+
+    .intro-p {
+        padding: 1em;
+        text-align: justify;
+    }
+
+    .card {
+        transition: 0.5s all;
+        max-width: 180px;
+        min-height: 300px;
+        background-color: black;
+        color: aliceblue;
+        border-radius: 10px;
+        translate: 10px 660px;
+        rotate: -10deg;
+        z-index: 2;
+    }
+
+    .card2 {
+        max-width: 180px;
+        min-height: 300px;
+        background-color: black;
+        color: aliceblue;
+        border-radius: 10px;
+        rotate: 15deg;
+        translate: 20px 410px;
+        transition: 0.5s all;
+        z-index: 1;
+    }
+
+    .card3 {
+        max-width: 180px;
+        min-height: 300px;
+        background-color: black;
+        color: aliceblue;
+        border-radius: 10px;
+        rotate: 10deg;
+        translate: 30px 140px;
+        transition: 0.5s all;
+        z-index: 0;
+    }
+
+    #out1 {
+        color: aliceblue;
+    }
+
+    
+</style>
+<body>
+    
+    <div id="container" style="overflow-y: scroll; height: 100vh;">
+        <header>
+            <h1 class="site-title">Quinta Série</h1>
+            <p class="intro-p">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, ad?</p>
+            <p class="intro-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dignissimos velit vel saepe labore. Dolorum esse consequatur, odio voluptate suscipit voluptatum delectus corporis id quas laudantium! Ex minima perspiciatis dicta deleniti, dolorem reprehenderit ipsum ad reiciendis. Possimus neque dolore iure nulla quidem facilis, odit, dignissimos quasi eum mollitia placeat. Harum?</p>
+            
+        </header>
+        <div id="se1" style="height: 8000px; position: relative;">
+            <div style="height: 400px; position: sticky; top: 0; ">
+                <p id="out1">asddsfsdfd</p>
+                <div id="card1" class="card">Card1</div>
+                <div id="card2" class="card2">Card2</div>
+                <div id="card3" class="card3">Card3</div>
+            </div>
+        </div>
+        <div style="height: 8000px; position: relative; background-color: blueviolet;">
+            <div style="height: 400px; position: sticky; top: 0;">
+                Hello world, from section 2!
+            </div>
+        </div>
+    </div>
+    <script>
+        let count;
+        //change card1_start_translateY if content is added before the card1 container
+        const card1_start_translateY = 660;
+        const card2_start_translateY = 410;
+        const card3_start_translateY = 140;
+        const card1_start_translateX = 10;
+        const card2_start_translateX = 20;
+        const card3_start_translateX = 30;
+        
+        const container = document.getElementById('container');
+        const se1 = document.getElementById('se1');
+        const card1 = document.getElementById('card1');
+
+        // const se2 = document.getElementById('se2');
+        const out1 = document.getElementById("out1");
+        // const out2 = document.getElementById('out2');
+
+        
+
+        function card1Anim(scroll_pos){
+            
+            let y = card1_start_translateY - (scroll_pos * 1.5);
+            if (y < 0) {y = 0};
+            card1.style.translate = `${card1_start_translateX}px ${y}px`;
+            if (scroll_pos == 0) {
+                card1.style.rotate = '-10deg';
+            } else {
+                card1.style.rotate = '0deg';
+            }
+        }
+
+        function card2Anim(scroll_pos){
+            let newscrollpos = scroll_pos - 600
+            let y = card2_start_translateY - (newscrollpos);
+            
+            if(y < -290) {y = -290}
+            card2.innerText = newscrollpos;
+            if (scroll_pos <= 900) {
+                card2.style.rotate = '10deg';
+                card2.style.translate = `${card2_start_translateX}px ${y}px`
+            } 
+            else if (scroll_pos <= 1100) {
+                card2.style.translate = `${card2_start_translateX}px ${y}px`;
+                card2.style.rotate = '2deg';
+            } else {
+                card2.style.translate = `${card2_start_translateX}px ${y}px`
+            }
+        }
+
+        function card3Anim(scroll_pos){
+            
+            let newscrollpos = scroll_pos - 1600
+            let y = card3_start_translateY - (newscrollpos);
+            
+            if(y < -580) {y = -580}
+            card3.innerText = newscrollpos;
+            if (scroll_pos <= 2000) {
+                card3.innerText = "fesdfsd";
+                card3.style.rotate = '15deg';
+                card3.style.translate = `${card3_start_translateX}px ${y}px`
+            } else if (scroll_pos <= 2400) {
+                card3.style.rotate = '-4deg';
+                card3.style.translate = `${card3_start_translateX}px ${y}px`
+            }
+            // else {
+            //     card3.style.translate = `300px ${y}px`;
+            //     card3.style.rotate = '10deg';
+            // }
+        }
+
+        container.addEventListener('scroll', ()=>{
+            let scroll_pos = container.scrollTop
+            // out1.innerHTML = scroll_pos;
+            card1Anim(scroll_pos);
+            if (scroll_pos > 1600) {
+                card3Anim(scroll_pos);
+            }
+            else if(scroll_pos > 600) {
+                card2Anim(scroll_pos);
+            } 
+             
+
+        })
+
+    </script>
+</body>
+</html>
